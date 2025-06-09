@@ -36,7 +36,7 @@ const secondPlane = new THREE.Mesh(geometry, material);
 const thirdPlane = new THREE.Mesh(geometry, material);
 const forthPlane = new THREE.Mesh(geometry, material);
 
-const planePivot = new THREE.Object3D();
+const pivot = new THREE.Object3D();
 
 firstPlane.position.z = -5;
 secondPlane.position.z = 5;
@@ -45,18 +45,18 @@ thirdPlane.rotation.y = 5;
 forthPlane.position.x = -5.5;
 forthPlane.rotation.y = -5;
 
-scene.add(planePivot);
-planePivot.add(firstPlane);
-planePivot.add(secondPlane);
-planePivot.add(thirdPlane);
-planePivot.add(forthPlane);
+scene.add(pivot);
+pivot.add(firstPlane);
+pivot.add(secondPlane);
+pivot.add(thirdPlane);
+pivot.add(forthPlane);
 
 
 
 // ------- animate -------
 function animate() {
 
-    // planePivot.rotation.y += 0.010;
+    pivot.rotation.y += 0.010;
 
     controls.update();
     renderer.render( scene, camera );
