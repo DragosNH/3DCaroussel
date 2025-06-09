@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 // ------- scene + camera -------
 const scene = new THREE.Scene();
@@ -22,19 +23,44 @@ window.addEventListener('resize', () => {
     renderer.setSize(width, height);
 });
 
-// ------ Ojects ------
-const geometry = new THREE.BoxGeometry(1,1,1);
-const material = new THREE.MeshBasicMaterial({color : 0xff00ff });
-const cube = new THREE.Mesh(geometry, material);
+const controls = new OrbitControls( camera, renderer.domElement );
 
-scene.add(cube);
+// ------ Ojects ------
+const geometry = new THREE.PlaneGeometry( 3.5, 5 );
+const material = new THREE.MeshBasicMaterial({
+    color : 0x5f90af,
+    side: THREE.DoubleSide,
+});
+const firstPlane = new THREE.Mesh(geometry, material);
+const secondPlane = new THREE.Mesh(geometry, material);
+const thirdPlane = new THREE.Mesh(geometry, material);
+const forthPlane = new THREE.Mesh(geometry, material);
+
+const planePivot = new THREE.Object3D();
+
+firstPlane.position.z = -5;
+secondPlane.position.z = 5;
+thirdPlane.position.x = 5;
+thirdPlane.rotation.y = 5;
+forthPlane.position.x = -5.5;
+forthPlane.rotation.y = -5;
+
+scene.add(planePivot);
+planePivot.add(firstPlane);
+planePivot.add(secondPlane);
+planePivot.add(thirdPlane);
+planePivot.add(forthPlane);
+
+
 
 // ------- animate -------
 function animate() {
 
+    // planePivot.rotation.y += 0.010;
 
-  renderer.render( scene, camera );
-  renderer.setAnimationLoop( animate );
+    controls.update();
+    renderer.render( scene, camera );
+    renderer.setAnimationLoop( animate );
 }
 
 animate();
