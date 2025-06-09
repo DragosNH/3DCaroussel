@@ -11,7 +11,7 @@ const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(width, height);
 document.body.appendChild( renderer.domElement );
-camera.position.set(0, 0, 10);
+camera.position.set(0, 0, 20);
 
 // ------- Responsive design -------
 window.addEventListener('resize', () => {
@@ -26,6 +26,8 @@ window.addEventListener('resize', () => {
 const controls = new OrbitControls( camera, renderer.domElement );
 
 // ------ Ojects ------
+
+/*  Plane test
 const geometry = new THREE.PlaneGeometry( 3.5, 5 );
 const material = new THREE.MeshBasicMaterial({
     color : 0x5f90af,
@@ -50,6 +52,23 @@ pivot.add(firstPlane);
 pivot.add(secondPlane);
 pivot.add(thirdPlane);
 pivot.add(forthPlane);
+*/
+
+// Cylinder Test
+const pivot = new THREE.Object3D();
+scene.add(pivot);
+
+const geometry = new THREE.CylinderGeometry(3.5, 3.5, 5, 25, true, 10, 10, 1);
+const firstMaterial = new THREE.MeshBasicMaterial({
+    color : 0x5f90af,
+    side: THREE.DoubleSide,
+});
+const firstFace = new THREE.Mesh(geometry, firstMaterial);
+firstFace.position.z = 5
+
+
+pivot.add(firstFace);
+
 
 
 
